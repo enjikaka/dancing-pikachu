@@ -15,6 +15,16 @@ function play () {
   video.play();
 }
 
+video.addEventListener('timeupdate', () => {
+  if (video.currentTime >= 19.44) {
+    video.currentTime = 4.67;
+  }
+});
+
+video.addEventListener('mousedown', () => {
+  console.log(video.currentTime);
+})
+
 fileOpener.addEventListener('change', async (event) => {
   const file = event.target.files[0];
   const arrayBuffer = await readFileAsArrayBuffer(file);
