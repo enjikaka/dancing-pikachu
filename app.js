@@ -18,6 +18,9 @@ function play () {
 fileOpener.addEventListener('change', async (event) => {
   const file = event.target.files[0];
   const arrayBuffer = await readFileAsArrayBuffer(file);
+  const blobURL = URL.createObjectURL(file);
+
+  audio.src = blobURL;
 
   MUSIC_BPM = await detectBPM(arrayBuffer);
 
