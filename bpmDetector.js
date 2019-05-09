@@ -130,12 +130,16 @@ export default async function detectBPM (arrayBuffer) {
       const { renderedBuffer } = event;
       const peaks = getPeaks([renderedBuffer.getChannelData(0), renderedBuffer.getChannelData(1)]);
       const groups = getIntervals(peaks);
+      const firstPeakPosition = peaks[0].position / audioBuffer.length;
 
       const top = groups.sort(function(intA, intB) {
         return intB.count - intA.count;
       }).splice(0, 5);
 
-      resolve(top[0].tempo);
+      resolve({
+        bpm: top[0].tempo,
+        firstPeakPosition
+      });
     };
   });
 }
